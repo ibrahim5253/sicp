@@ -1,0 +1,21 @@
+(define (pascal n)
+  ;; Get the element at (row, col)
+  (define (util row col)
+    (if (or (= col 1) (= row col))
+      1
+      (+ (util (- row 1) (- col 1))
+         (util (- row 1) col)
+         )
+      ) 
+    )
+  ;; Get the row in which n lies
+  (define (getrow k)
+    (if (<= n (/ (* k (+ k 1)) 2))
+      k
+      (getrow (+ k 1))
+      )
+    )
+  (define R (getrow 1))
+  (define C (- n (/ (* R (- R 1)) 2)))
+  (util R C)
+  )
